@@ -1,11 +1,7 @@
-<script setup>
-import ThumbnailCard from "./components/ThumbnailCard.vue";
-import OverlayCard from "./components/OverlayCard.vue";
+<script setup lang="ts">
+import XlsxReaderPanel from "./components/XlsxReaderPanel.vue";
 </script>
 
 <template>
-  <div class="page">
-    <ThumbnailCard />
-    <OverlayCard />
-  </div>
+  <XlsxReaderPanel />
 </template>
