@@ -1,10 +1,8 @@
 rm -rf ./dist-mp/*
 
-export RUSTFLAGS="-C target-feature=-reference-types"
+export RUSTFLAGS="-C target-feature=+simd128,-reference-types"
 
-cargo build \
-    --target wasm32-unknown-unknown \
-    --release
+cargo build --release
 
 wasm-bindgen \
     target/wasm32-unknown-unknown/release/xlsx_reader.wasm \

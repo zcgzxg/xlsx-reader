@@ -17,6 +17,8 @@
     "imageops",
     "rlib",
     "rustc",
+    "RUSTFLAGS",
+    "serde",
     "Talck",
     "webp"
   ]

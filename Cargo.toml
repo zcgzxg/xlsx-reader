@@ -12,6 +12,8 @@ default = ["console_error_panic_hook"]
 [dependencies]
 calamine = { version = "0.33.0", default-features = false }
 console_error_panic_hook = { version = "0.1.7", optional = true }
+serde = {version = "1.0.228", features = ["derive"]}
+serde-wasm-bindgen = "0.6.5"
 wasm-bindgen = { version = "0.2.106", default-features = false, features = [] }
 
 [profile.release]
