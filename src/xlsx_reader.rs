@@ -91,7 +91,7 @@ impl Serialize for WorkSheets {
 
         for (name, range) in &self.sheets {
             let rows: Vec<Vec<CellDataRef>> = Self::rows(range)
-                .map(|row| row.iter().map(|cell| CellDataRef::from(cell)).collect())
+                .map(|row| row.iter().map(Into::into).collect())
                 .collect();
             let headers = Self::headers(range);
 
@@ -107,8 +107,7 @@ impl Serialize for WorkSheets {
 pub fn read_xlsx(data: &[u8]) -> Result<WorkSheetsOutPut, JsError> {
     let cursor = Cursor::new(data);
     let mut reader: Xlsx<_> = open_workbook_from_rs(cursor)?;
+    let work_sheets = WorkSheets::new(reader.worksheets());
 
-    Ok(serde_wasm_bindgen::to_value(&WorkSheets::new(
-        reader.worksheets(),
-    ))?.unchecked_into())
+    Ok(serde_wasm_bindgen::to_value(&work_sheets)?.unchecked_into())
 }
