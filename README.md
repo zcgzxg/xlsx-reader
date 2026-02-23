@@ -31,8 +31,9 @@ Map<
 
 需要准备以下工具：
 
-- Rust（建议使用 `rustup` 安装）
+- Rust Nightly（建议使用 `rustup` 安装）
 - `wasm-bindgen-cli`
+- `wasm-opt`（用于压缩 WASM 体积，来自 `binaryen`）
 - `static-compress`
 - Node.js（用于运行 `web/` 下的 Vue 示例）
 - `ast-grep`（仅微信小程序构建需要）
@@ -40,8 +41,10 @@ Map<
 安装示例：
 
 ```bash
-rustup target add wasm32-unknown-unknown
+rustup toolchain install nightly
+rustup target add wasm32-unknown-unknown --toolchain nightly
 cargo install wasm-bindgen-cli static-compress
+# wasm-opt 可通过系统包管理器安装，如 npm install -g binaryen、brew install binaryen 或 apt install binaryen
 ```
 
 `ast-grep` 可参考官方安装方式（如 npm、cargo 或二进制包）安装，并确保命令 `sg` 可用。
@@ -56,7 +59,8 @@ cargo install wasm-bindgen-cli static-compress
 
 该脚本会完成：
 
-- `cargo build --release`
+- `cargo +nightly build --release`
+- 使用 `wasm-opt` 进行深度体积优化
 - 使用 `wasm-bindgen` 生成 JS/WASM 绑定文件到 `web/src/xlsx-reader`
 - 对 `.wasm` 文件做 brotli 压缩
 
