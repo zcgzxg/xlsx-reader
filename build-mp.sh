@@ -1,6 +1,6 @@
 rm -rf ./dist-mp/*
 
-# export RUSTFLAGS="-C target-feature=+simd128,-reference-types"
+export RUSTFLAGS="-C target-feature=+simd128,-reference-types"
 
 cargo +nightly build --release
 
@@ -34,3 +34,5 @@ static-compress \
     ./dist-mp/*.wasm
 
 ls -lah ./dist-mp
+rm -rf ./miniprogram/src/xlsx-reader
+cp -r ./dist-mp ./miniprogram/src/xlsx-reader
